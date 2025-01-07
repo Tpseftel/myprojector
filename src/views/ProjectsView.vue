@@ -1,3 +1,3 @@
 <template>
-    <h1>Projects</h1>
+<p class="bg-red-500">tcest hellod</p>
 </template>
