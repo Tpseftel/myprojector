@@ -1,0 +1,28 @@
+{
+    "projects": [
+        {
+            "id": 1,
+            "name": "Bike setup",
+            "description": "This is a project to organize the tasks about my bike setup",
+            "taskList": [
+                {
+                    "title": "Fix flat tire",
+                    "description": "The rear tire is flat, I need to fix it",
+                    "status": "todo"
+                },
+                {
+                    "title": "Fix Brakes",
+                    "description": "Back brake's disk needs fixing",
+                    "status": "todo"
+                },
+                {
+                    "title": "Put oil in the chain",
+                    "description": "Add oil in the chain",
+                    "status": "todo"
+                }
+
+            ]
+        }
+
+    ]
+}

@@ -10,7 +10,7 @@
 <script setup>
 import MainHeader from "@/components/MainHeader.vue";
 import MainFooter from "@/components/MainFooter.vue";
-import MainNavBar from "@/components/MainNavBar.vue"
+import MainNavBar from "@/components/MainNavBar.vue";
 </script>
 
 <style>

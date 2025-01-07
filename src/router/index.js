@@ -5,7 +5,7 @@ const routes = [
   {
     path: '/',
     name: 'Projects',
-    component: () => import('@/views/ProjectsView.vue'), // Lazy loading
+    component: () => import('@/views/project/ProjectsBoard.vue'), // Lazy loading
   },
   {
     path: '/about',
