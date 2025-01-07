@@ -1,16 +1,16 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <router-view/>
-  <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
+  <div class="flex flex-col min-h-screen">
+    <MainHeader />
+    <MainNavBar />
+    <router-view />
+    <MainFooter />
+  </div>
 </template>
 
-<script>
-
-export default {
-  name: 'App',
-  components: {
-  }
-}
+<script setup>
+import MainHeader from "@/components/MainHeader.vue";
+import MainFooter from "@/components/MainFooter.vue";
+import MainNavBar from "@/components/MainNavBar.vue"
 </script>
 
 <style>
@@ -20,6 +20,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
