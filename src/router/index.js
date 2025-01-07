@@ -2,11 +2,15 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 // Define routes
 const routes = [
-
   {
-    path: '/about/',
+    path: '/',
+    name: 'Projects',
+    component: () => import('@/views/ProjectsView.vue'), // Lazy loading
+  },
+  {
+    path: '/about',
     name: 'About',
-    component: () => import('@/components/views/AboutView.vue'), // Lazy loading
+    component: () => import('@/views/AboutView.vue'), // Lazy loading
   },
 ];
 
