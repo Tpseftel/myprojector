@@ -3,8 +3,8 @@
     <li
       v-for="task in sortedTasks"
       :key="task.id"
-      class="flex items-center space-x-3 rtl:space-x-reverse cursor-pointer border-b-2 pb-4"
-      @click="toggleisDone"
+      class="flex w-full items-center space-x-3 rtl:space-x-reverse cursor-pointer border-b-2 pb-4"
+      @click="toggleisDone(task)"
     >
       <svg
         :class="[
@@ -30,6 +30,10 @@
         :class="[task.isDone ? 'line-through font-light' : 'font-semibold']"
         >{{ task.title }}</span
       >
+      <button 
+      @click="removeTask(task.id)"
+      type="button" class=" focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" style="margin-left:auto">Remove</button>
+
     </li>
   </ul>
 </template>
@@ -47,6 +51,9 @@ onMounted(async () => {
   projectTasks.value = taskStore.getTasksByProjectId(props.projectId);
 });
 
+/**
+ * Move done tasks at the bottom
+ */
 const sortedTasks = computed(() => {
   return projectTasks.value.slice().sort((a, b) => {
     if (a.isDone === b.isDone) {
@@ -56,5 +63,13 @@ const sortedTasks = computed(() => {
   });
 });
 
-const toggleisDone = () => {};
+const toggleisDone = (task) => {
+  console.log("toggel");
+  
+  task.isDone ? taskStore.setTaskUndone(task.id) : taskStore.setTaskDone(task.id);
+};
+const removeTask = (taskId) => {
+  taskStore.removeTask(taskId);
+  projectTasks.value =  projectTasks.value.filter((task) => task.id != taskId);
+};
 </script>
