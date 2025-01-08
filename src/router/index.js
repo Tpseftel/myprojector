@@ -1,16 +1,30 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHistory } from "vue-router";
 
 // Define routes
 const routes = [
   {
-    path: '/',
-    name: 'Projects',
-    component: () => import('@/views/project/ProjectsBoard.vue'), // Lazy loading
+    path: "/projects",
+  name: "Projects",
+    component: () => import("@/views/project/ProjectsBoard.vue"), // Lazy loading
+    children: [
+      {
+        name: "ProjectEdit",
+        path: ":projectId/edit",
+        component: () => import("@/views/project/ProjectEditView.vue"),
+        props: true,
+      },
+      {
+        name: "ProjectDetails",
+        path: ":projectId/details",
+        component: () => import("@/views/project/ProjectDetailsView.vue"),
+        props: true,
+      },
+    ],
   },
   {
-    path: '/about',
-    name: 'About',
-    component: () => import('@/views/AboutView.vue'), // Lazy loading
+    path: "/about",
+    name: "About",
+    component: () => import("@/views/AboutView.vue"), // Lazy loading
   },
 ];
 

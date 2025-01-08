@@ -12,17 +12,24 @@
       Add project
     </button>
   </div>
-  <div class="flex justify-start space-x-4">
-    <ProjectCard
-      v-for="project in project.getAllProjects"
-      :key="project.id"
-      :title="project.name"
-      :description="project.description"
-    />
+  <div class="flex flex-wrap">
+    <div class=" flex flex-wrap w-full sm:w-1/2 gap-4">
+      <div v-for="project in project.getAllProjects" class="w-full sm:w-1/3"  :key="project.id">
+        <ProjectCard
+          :title="project.name"
+          :description="project.description"
+          :projectId="project.id"
+        />
+      
+      </div>
+    </div>
+    <div class="w-full sm:w-1/2">
+    <router-view/>
+    </div>
   </div>
+
   <!-- INFO: Modal Start -->
   <ProjectModal :isOpen="isModalOpen" @closeModal="handleCloseModal" />
-
   <!-- INFO: Modal End -->
 </template>
 
@@ -40,7 +47,7 @@ const openModal = () => {
 };
 const handleCloseModal = () => {
   isModalOpen.value = false;
-}
+};
 
 onMounted(async () => {
   await project.init();
