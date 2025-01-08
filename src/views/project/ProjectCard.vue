@@ -15,6 +15,7 @@
     <div class="flex flex-wrap">
       <div>
         <router-link
+          :key="$route.params.projectId"
           :to="{ name: 'ProjectDetails', params: { projectId: projectId } }"
         >
           <button

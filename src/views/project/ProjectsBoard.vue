@@ -24,7 +24,8 @@
       </div>
     </div>
     <div class="w-full sm:w-1/2">
-    <router-view/>
+    <!-- INFO: use :key to rerender the view when the url parameter changes -->
+    <router-view  :key="$route.params.projectId" />
     </div>
   </div>
 
