@@ -118,7 +118,7 @@
         </form>
         <!-- Modal footer -->
         <div
-          class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600"
+          class="flex items-center p-2 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600"
         >
           <button
             data-modal-hide="default-modal"

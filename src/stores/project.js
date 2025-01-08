@@ -1,5 +1,10 @@
 import { defineStore } from "pinia";
-const endpoint = "http://localhost:3000/projects";
+const api = {
+  endpoint: "http://localhost:3000/projects",
+  headers : {
+    "Content-Type": "application/json",
+  }
+}
 export const useProjectStore = defineStore("projectStore", {
   state: () => ({
     projects: [],
@@ -8,14 +13,14 @@ export const useProjectStore = defineStore("projectStore", {
     getAllProjects: (state) => {
       return state.projects;
     },
-    getProjectById: (state) => (id) =>  {
-        return  state.projects.find((project) => project.id === id)
-    }
+    getProjectById: (state) => (id) => {
+      return state.projects.find((project) => project.id === id);
+    },
   },
   actions: {
     async init() {
       try {
-        let response = await fetch(endpoint);
+        let response = await fetch(api.endpoint);
         if (!response.ok) {
           throw new Error("Error Occured");
         }
@@ -25,11 +30,9 @@ export const useProjectStore = defineStore("projectStore", {
       }
     },
     async addProject(project) {
-      const resp = await fetch(endpoint, {
+      const resp = await fetch(api.endpoint, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: api.headers,
         body: JSON.stringify(project),
       });
       if (!resp.ok) {
@@ -37,6 +40,24 @@ export const useProjectStore = defineStore("projectStore", {
       }
       const newProject = await resp.json();
       this.projects.push(newProject);
+    },
+    async updateProject(projectId, projectData) {
+      const resp = await fetch(api.endpoint + "/" + projectId, {
+        method: "Put",
+        headers: api.headers,
+        body: JSON.stringify(projectData)
+      });
+      if (!resp.ok) {
+        throw new Error(`Error: ${resp.status} ${resp.statusText}`);
+      }
+      const updatedProject = await resp.json();
+      
+      // Update local projects
+      const index = this.projects.findIndex(project => project.id === projectId);
+      if (index !== -1) {
+        this.projects[index] = updatedProject;
+      }
+      console.log("Project updated successfully:", updatedProject);
     },
   },
 });

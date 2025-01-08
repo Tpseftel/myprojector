@@ -1,9 +1,10 @@
 <template>
-  <h1>Edit View</h1>
-  ProjectId: {{ projectId }}
+  <h2 class="text-4xl font-extrabold text-left py-4 dark:text-white">Edit</h2>
+  <CustomForm :projectId="projectId"/>
 </template>
 
 <script setup>
 import { defineProps } from "vue";
+import CustomForm from '@/components/CustomForm.vue'
 defineProps(["projectId"]);
 </script>
