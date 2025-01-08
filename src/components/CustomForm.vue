@@ -1,5 +1,8 @@
 <template>
-  <form @submit.prevent="handleSubmit" class="md:p-5 text-left  p-7 mx-10 shadow-xl">
+  <form
+    @submit.prevent="handleSubmit"
+    class="md:p-5 text-left p-7 mx-10 shadow-xl"
+  >
     <div class="grid gap-4 mb-4 grid-cols-2 text-left">
       <div class="col-span-1">
         <label
@@ -68,15 +71,25 @@
       </li>
     </ul>
     <!-- INFO: Task List End-->
-    <div class="submit--button py-5">
+    <div class="flex gap-4 flex-wrap submit--button py-5">
       <button
         data-modal-hide="default-modal"
         @click="editProject(props.projectId)"
-        type="button"
+        type="submit"
         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
       >
         Edit Project
       </button>
+      <button
+        data-modal-hide="default-modal"
+        @click="router.back()"
+        type="submit"
+        class="text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800"
+      >
+        Edit Project
+      </button>
+
+      
     </div>
   </form>
 </template>
@@ -84,6 +97,7 @@
 <script setup>
 import { ref, reactive, defineProps, onMounted } from "vue";
 import { useProjectStore } from "@/stores/project";
+import router from "@/router";
 
 const props = defineProps(["projectId"]);
 const projectStore = useProjectStore();
@@ -94,7 +108,7 @@ const newTask = ref("");
 onMounted(() => {
   let project = projectStore.getProjectById(props.projectId);
   if (project) {
-    Object.assign(currentProject, project )
+    Object.assign(currentProject, project);
   }
 });
 
@@ -109,6 +123,8 @@ const editProject = (projectId) => {
   currentProject.description = "";
   currentProject.taskList = [];
   newTask.value = "";
+
+  router.push("/projects");
 };
 
 const addTask = () => {
