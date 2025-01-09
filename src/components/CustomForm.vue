@@ -88,18 +88,8 @@ const editProject = (projectId) => {
   // Refresh Form
   currentProject.name = "";
   currentProject.description = "";
-  currentProject.taskList = [];
   newTask.value = "";
 
   router.push("/projects");
 };
-
-// const addTask = () => {
-//   currentProject.taskList.push({
-//     id: "20",
-//     title: newTask.value,
-//     done: false,
-//   });
-//   newTask.value = "";
-// };
 </script>

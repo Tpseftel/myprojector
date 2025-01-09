@@ -17,7 +17,7 @@
     </p>
 
     <!-- Task List -->
-    <TaskList :projectId="currentProject.id">  </TaskList>
+    <TaskList :projectId="projectId">  </TaskList>
 
   </div>
   <!-- INFO: Card End -->

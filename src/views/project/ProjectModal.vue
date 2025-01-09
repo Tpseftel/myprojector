@@ -113,7 +113,6 @@ const newTask = ref("");
 const newProject = reactive({
   name: "",
   description: "",
-  taskList: [],
 });
 
 // Functions
@@ -122,7 +121,6 @@ const addProject = () => {
   // Refresh Form
   newProject.name = "";
   newProject.description = "";
-  newProject.taskList = [];
   newTask.value = ""
   closeModal();
 };
