@@ -31,6 +31,22 @@ export const useTaskStore = defineStore("taskStore", {
         console.log(err);
       }
     },
+    async addTask(newTask) {
+      try {
+      let response = await fetch(api.endpoint, {
+        method: "POST",
+        headers: api.headers,
+        body: JSON.stringify(newTask),
+      });
+      if (!response.ok) {
+        throw new Error("Error Occured");
+      }
+      let createdTask = await response.json();
+      this.tasks.push(createdTask);
+      } catch (err) {
+      console.log(err);
+      }
+    },
     async removeTask(taskId) {
       try {
         let response = await fetch(`${api.endpoint}/${taskId}`, {
@@ -40,7 +56,7 @@ export const useTaskStore = defineStore("taskStore", {
         if (!response.ok) {
           throw new Error("Error Occured");
         }
-        this.tasks = this.tasks.filter((task) => task.id != taskId);
+        this.tasks = this.tasks.filter((task) => task.id !== taskId);
       } catch (err) {
         console.log(err);
       }

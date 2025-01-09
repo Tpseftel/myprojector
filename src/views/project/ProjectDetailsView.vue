@@ -2,7 +2,6 @@
   <h2 class="text-4xl font-extrabold text-left py-4 dark:text-white">
     Overview
   </h2>
-  {{ currentProject.name }}
 
 <!-- INFO: Card Start -->
   <div
