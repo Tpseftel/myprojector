@@ -1,7 +1,7 @@
 <template>
-  <div class="flex flex-col min-h-screen">
+  <div :class="[isDark ? 'dark' : '', 'flex flex-col min-h-screen']"   >
     <MainHeader />
-    <MainNavBar />
+    <MainNavBar @toggleTheme="handleTheme" />
     <router-view />
     <MainFooter />
   </div>
@@ -12,13 +12,18 @@ import MainHeader from "@/components/MainHeader.vue";
 import MainFooter from "@/components/MainFooter.vue";
 import MainNavBar from "@/components/MainNavBar.vue";
 
+import { onMounted, ref } from "vue";
 import { useUserStore } from "@/stores/user";
-import { onMounted } from "vue";
 const userStore = useUserStore();
+const isDark = ref(false);
 
 onMounted(async () => {
   await userStore.loginUser();
 });
+
+const handleTheme = (off) => {
+  isDark.value = off;
+};
 </script>
 
 <style>
