@@ -37,39 +37,7 @@
       </div>
     </div>
     <!-- INFO: Task List Start-->
-    <h2>Add new task</h2>
-    <div class="flex space-x-4 items-center">
-      <div class="relative z-0 w-1/2 mb-5 group">
-        <input
-          type="text"
-          name="task_name"
-          id="task_name"
-          class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-          placeholder=" "
-          required
-          v-model="newTask"
-        />
-        <label
-          for="task_name"
-          class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-          >New Task</label
-        >
-      </div>
-      <div>
-        <button
-          @click="addTask"
-          type="button"
-          class="px-3 py-2 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-        >
-          Add
-        </button>
-      </div>
-    </div>
-    <ul class="text-left">
-      <li v-for="task in currentProject.taskList" :key="task">
-        {{ task.title }}
-      </li>
-    </ul>
+    <TaskList :projectId="projectId" />
     <!-- INFO: Task List End-->
     <div class="flex gap-4 flex-wrap submit--button py-5">
       <button
@@ -88,8 +56,6 @@
       >
         Cancel
       </button>
-
-      
     </div>
   </form>
 </template>
@@ -97,6 +63,7 @@
 <script setup>
 import { ref, reactive, defineProps, onMounted } from "vue";
 import { useProjectStore } from "@/stores/project";
+import TaskList from '@/components/TaskList.vue'
 import router from "@/router";
 
 const props = defineProps(["projectId"]);
@@ -127,12 +94,12 @@ const editProject = (projectId) => {
   router.push("/projects");
 };
 
-const addTask = () => {
-  currentProject.taskList.push({
-    id: "20",
-    title: newTask.value,
-    done: false,
-  });
-  newTask.value = "";
-};
+// const addTask = () => {
+//   currentProject.taskList.push({
+//     id: "20",
+//     title: newTask.value,
+//     done: false,
+//   });
+//   newTask.value = "";
+// };
 </script>
