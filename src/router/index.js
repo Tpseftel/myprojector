@@ -4,7 +4,7 @@ import { createRouter, createWebHistory } from "vue-router";
 const routes = [
   {
     path: "/projects",
-  name: "Projects",
+    name: "Projects",
     component: () => import("@/views/project/ProjectsBoard.vue"), // Lazy loading
     children: [
       {
@@ -20,6 +20,16 @@ const routes = [
         props: true,
       },
     ],
+  },
+  {
+    path: "/",
+    name: "Home",
+    component: () => import("@/views/HomeView.vue")
+  },
+  {
+    path: "/login",
+    name: "Login",
+    component: () => import("@/views/LoginView.vue")
   },
   {
     path: "/about",
