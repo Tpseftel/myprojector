@@ -41,7 +41,7 @@
               >
             </router-link>
           </div>
-          <div v-if="userStore.getIsAdmin">
+          <div v-if="userStore.authUser">
             <router-link
               :key="$route.params.projectId"
               :to="{ name: 'Projects' }"

@@ -6,14 +6,11 @@ const api = {
 
 export const useUserStore = defineStore("userStore", {
   state: () => ({
-    authUser: {},
+    authUser: null,
   }),
   getters: {
-    getAuthUser: (state) => {
-        return state.authUser;
-    },
-    getIsAdmin: (state) => {
-      return state.authUser.isAdmin ? state.authUser.isAdmin : false;
+    isAdmin: (state) => {
+      return state.authUser ? state.authUser.isAdmin : false
     },
   },
   actions: {

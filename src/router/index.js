@@ -1,4 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
+import { useUserStore } from "@/stores/user";
+
+
 
 // Define routes
 const routes = [
@@ -12,6 +15,15 @@ const routes = [
         path: ":projectId/edit",
         component: () => import("@/views/project/ProjectEditView.vue"),
         props: true,
+        beforeEnter: (to, from, next) => {
+          const authUser = useUserStore();
+          const isAdmin = authUser.isAdmin/* logic to determine if user is admin */;
+          if (isAdmin) {
+            next();
+          } else {
+            next({ name: "Login" });
+          }
+        },
       },
       {
         name: "ProjectDetails",
