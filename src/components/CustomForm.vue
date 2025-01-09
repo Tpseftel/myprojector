@@ -1,7 +1,10 @@
 <template>
   <form
-    @submit.prevent="handleSubmit"
-    class="md:p-5 text-left p-7 mx-10 shadow-xl"
+    @submit.prevent="handleSubmit(projectId)"
+    :class="[
+      'md:p-5 text-left p-7 mx-10',
+      action === 'edit' ? 'shadow-xl' : ''
+    ]"
   >
     <div class="grid gap-4 mb-4 grid-cols-2 text-left">
       <div class="col-span-1">
@@ -17,7 +20,6 @@
           id="name"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
           placeholder="Type product name"
-          required=""
         />
       </div>
 
@@ -37,21 +39,31 @@
       </div>
     </div>
     <!-- INFO: Task List Start-->
-    <TaskList :projectId="projectId" />
+    <TaskList v-if="action === 'edit'" :projectId="projectId" />
     <!-- INFO: Task List End-->
     <div class="flex gap-4 flex-wrap submit--button py-5">
       <button
+        v-if="action === 'edit'"
         data-modal-hide="default-modal"
-        @click="editProject(props.projectId)"
         type="submit"
         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
       >
         Edit Project
       </button>
       <button
+        v-if="action === 'create'"
+        data-modal-hide="default-modal"
+        type="submit"
+        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+      >
+        Create Project
+      </button>
+
+      <button
+        v-if="action === 'edit'"
         data-modal-hide="default-modal"
         @click="router.back()"
-        type="submit"
+        type="button"
         class="text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800"
       >
         Cancel
@@ -61,14 +73,14 @@
 </template>
 
 <script setup>
-import { ref, reactive, defineProps, onMounted } from "vue";
+import { ref, defineEmits, reactive, defineProps, onMounted } from "vue";
 import { useProjectStore } from "@/stores/project";
-import TaskList from '@/components/TaskList.vue'
+import TaskList from "@/components/TaskList.vue";
 import router from "@/router";
 
-const props = defineProps(["projectId"]);
+const props = defineProps(["projectId", "action"]);
 const projectStore = useProjectStore();
-
+const emit = defineEmits(["closeModal"]);
 const currentProject = reactive({});
 const newTask = ref("");
 
@@ -79,8 +91,22 @@ onMounted(() => {
   }
 });
 
-const handleSubmit = () => {
-  console.log("Handle Submit");
+const handleSubmit = (projectId) => {
+  props.action == "edit" && projectId != null
+    ? editProject(projectId)
+    : addProject();
+};
+
+const addProject = () => {
+  console.log(currentProject);
+
+  projectStore.addProject(currentProject);
+  currentProject.name = "";
+  currentProject.description = "";
+  closeModal();
+};
+const closeModal = () => {
+  emit("closeModal");
 };
 
 const editProject = (projectId) => {
