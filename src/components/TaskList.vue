@@ -8,6 +8,7 @@
         class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
         placeholder=" "
         v-model="newTask"
+        @keyup="errorTask = ''"
       />
       <label
         for="task_name"
@@ -25,12 +26,12 @@
       </button>
     </div>
   </div>
+  <p v-if="errorTask" class="text-red-500 text-sm  pl-3">{{ errorTask }}</p>
   <ul class="space-y-4 pt-6 text-left text-gray-500 dark:text-gray-400">
     <li
       v-for="task in sortedTasks"
       :key="task.id"
       class="flex w-full items-center space-x-3 rtl:space-x-reverse cursor-pointer border-b-2 pb-4"
-      
     >
       <svg
         :class="[
@@ -77,6 +78,7 @@ const taskStore = useTaskStore();
 const props = defineProps(["projectId"]);
 const projectTasks = ref([]);
 const newTask = ref("");
+const errorTask = ref('');
 
 onMounted(async () => {
   await taskStore.init();
@@ -103,6 +105,12 @@ const toggleIsDone = (task) => {
     : taskStore.setTaskDone(task.id);
 };
 const addTask = async () => {
+  errorTask.value = '';
+  if (!newTask.value) {
+    errorTask.value = 'Title is required'; 
+    return;
+  }
+    
   await taskStore.addTask({
     id: Math.floor(Math.random() * 10000) + "",
     projectId: props.projectId,
@@ -114,9 +122,8 @@ const addTask = async () => {
 };
 const removeTask = async (taskId) => {
   console.log("Remove Task");
-  
+
   await taskStore.removeTask(taskId);
   projectTasks.value = taskStore.getTasksByProjectId(props.projectId);
-  
 };
 </script>

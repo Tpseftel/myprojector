@@ -3,13 +3,13 @@
     @submit.prevent="handleSubmit(projectId)"
     :class="[
       'md:p-5 text-left p-7 mx-10',
-      action === 'edit' ? 'shadow-xl' : ''
+      action === 'edit' ? 'shadow-xl' : '',
     ]"
   >
     <div class="grid gap-4 mb-4 grid-cols-2 text-left">
       <div class="col-span-1">
         <label
-          for="title"
+          for="name"
           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >Title</label
         >
@@ -17,10 +17,17 @@
           v-model="currentProject.name"
           type="text"
           name="name"
-          id="name"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
           placeholder="Type product name"
+          @keyup="errors.name = []"
         />
+          <p
+            v-for="(error, index) in errors.name"
+            :key="index"
+            class="text-red-500 p-0 text-sm mt-2 pl-3"
+          >
+            {{ error }}
+          </p>
       </div>
 
       <div class="col-span-2">
@@ -83,6 +90,9 @@ const projectStore = useProjectStore();
 const emit = defineEmits(["closeModal"]);
 const currentProject = reactive({});
 const newTask = ref("");
+const errors = reactive({
+  name: [],
+});
 
 onMounted(() => {
   let project = projectStore.getProjectById(props.projectId);
@@ -92,14 +102,25 @@ onMounted(() => {
 });
 
 const handleSubmit = (projectId) => {
+  if (validateForm()) {
+    return;
+  }
   props.action == "edit" && projectId != null
     ? editProject(projectId)
     : addProject();
 };
 
-const addProject = () => {
-  console.log(currentProject);
+const validateForm = () => {
+  errors.name = [];
+  if (!currentProject.name) {
+    errors.name.push("Title is required.");
+  } else if (currentProject.name.length < 10) {
+    errors.name.push("Title must be at least 10 characters.");
+  }
+  return errors.name.length > 0;
+};
 
+const addProject = () => {
   projectStore.addProject(currentProject);
   currentProject.name = "";
   currentProject.description = "";
