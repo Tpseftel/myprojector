@@ -12,10 +12,10 @@
       Add project
     </button>
   </div>
-  <div class="flex flex-wrap  border-2 border-gray-500">
+  <div class="flex flex-wrap border-2 border-gray-500">
 
-    <div class=" flex flex-wrap justify-center md:justify-start border-2 border-blue-500 w-full md:w-1/2 gap-2">
-      <div v-for="project in project.getAllProjects" class="w-full lg:w-3/4"  :key="project.id">
+    <div class=" flex flex-wrap max-h-[576px]  overflow-y-hidden hover:overflow-y-auto  justify-center md:justify-start border-2 border-blue-500 w-full md:w-1/2 gap-2">
+      <div v-for="project in project.getAllProjects" class=" w-full lg:w-3/4"  :key="project.id">
         <ProjectCard
           :title="project.name"
           :description="project.description"

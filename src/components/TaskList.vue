@@ -27,7 +27,7 @@
     </div>
   </div>
   <p v-if="errorTask" class="text-red-500 text-sm  pl-3">{{ errorTask }}</p>
-  <ul class="space-y-4 pt-6 text-left text-gray-500 dark:text-gray-400">
+  <ul class="max-h-64 overflow-y-hidden hover:overflow-y-auto space-y-4 pt-6 text-left text-gray-500 dark:text-gray-400">
     <li
       v-for="task in sortedTasks"
       :key="task.id"
