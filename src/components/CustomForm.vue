@@ -2,7 +2,7 @@
   <form
     @submit.prevent="handleSubmit(projectId)"
     :class="[
-      'md:p-5 text-left p-7 mx-10 max-h-[500px] overflow-y-hidden hover:overflow-y-auto dark:bg-gray-700',
+      'md:p-5 text-left p-7 max-h-[500px] overflow-y-hidden hover:overflow-y-auto dark:bg-gray-700 max-w-[500px] mr-auto ',
       action === 'edit' ? 'shadow-xl' : '',
     ]"
   >

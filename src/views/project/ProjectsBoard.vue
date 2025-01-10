@@ -1,5 +1,5 @@
 <template>
-  <div class="flex  p-2">
+  <div class="flex  p-2 mt-2" >
     <button
       data-modal-target="default-modal"
       data-modal-toggle="default-modal"
@@ -12,7 +12,8 @@
   </div>
   <div class="flex flex-wrap p-3 ">
 
-    <div class=" flex flex-wrap max-h-[576px]  overflow-y-hidden hover:overflow-y-auto  justify-center md:justify-start w-full md:w-1/2 gap-2">
+    <div class=" flex flex-wrap max-h-[576px]  overflow-y-hidden hover:overflow-y-auto  justify-center md:justify-start w-full md:w-1/3 gap-2">
+    <div>
       <div v-for="project in project.getAllProjects" class=" w-full lg:w-3/4"  :key="project.id">
         <ProjectCard
           :title="project.name"
@@ -22,7 +23,9 @@
       
       </div>
     </div>
-    <div class="w-full  md:w-1/2">
+
+    </div>
+    <div class="w-full  md:w-2/3 px-7">
     <!-- INFO: use :key to rerender the view when the url parameter changes -->
     <router-view  :key="$route.params.projectId" />
     </div>
