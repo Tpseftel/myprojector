@@ -62,6 +62,24 @@
               {{ isDark ? 'Dark' : 'Light' }}
             </button>
           </div>
+          <div v-if="!userStore.authUser">
+            <button
+              type="button"
+              @click="userStore.loginUser"
+              class="text-gray-900 mb-0 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-1 me-2  dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+            >
+              Login
+            </button>
+          </div>
+          <div v-if="userStore.authUser">
+            <button
+              type="button"
+              @click="logout"
+              class="text-gray-900 mb-0 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-1 me-2  dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+            >
+              Logout
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -71,6 +89,7 @@
 <script setup>
 import {ref, defineEmits} from "vue"
 import { useUserStore } from "@/stores/user";
+import router from "@/router"
 
 const emit = defineEmits(['toggleTheme'])
 
@@ -78,9 +97,12 @@ const userStore = useUserStore();
 const isDark = ref(false);
 
 const toggleTheme = () => {
-  console.log('hello');
-  
   isDark.value = !isDark.value;
   emit('toggleTheme', isDark.value)
+}
+
+const logout = () => {
+  userStore.logoutUser();
+   router.push('/login')
 }
 </script>

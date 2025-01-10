@@ -26,5 +26,8 @@ export const useUserStore = defineStore("userStore", {
         console.error("Error logging in:", error);
       }
     },
+    logoutUser () {
+      this.authUser = null;
+    }
   },
 });

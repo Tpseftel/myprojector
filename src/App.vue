@@ -14,17 +14,11 @@ import MainHeader from "@/components/MainHeader.vue";
 import MainFooter from "@/components/MainFooter.vue";
 import MainNavBar from "@/components/MainNavBar.vue";
 
-import { onMounted, ref } from "vue";
-import { useUserStore } from "@/stores/user";
-const userStore = useUserStore();
+import { ref } from "vue";
 const isDark = ref(false);
 
-onMounted(async () => {
-  await userStore.loginUser();
-});
-
-const handleTheme = (off) => {
-  isDark.value = off;
+const handleTheme = (dark) => {
+  isDark.value = dark;
 };
 </script>
 

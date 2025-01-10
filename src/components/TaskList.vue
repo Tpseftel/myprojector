@@ -98,8 +98,6 @@ const sortedTasks = computed(() => {
 });
 
 const toggleIsDone = (task) => {
-  console.log("toggel");
-
   task.isDone
     ? taskStore.setTaskUndone(task.id)
     : taskStore.setTaskDone(task.id);

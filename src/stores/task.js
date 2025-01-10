@@ -12,9 +12,6 @@ export const useTaskStore = defineStore("taskStore", {
     tasks: [],
   }),
   getters: {
-    getTaskById: (state) => (taskId) => {
-      return state.tasks.find((task) => task.id === taskId);
-    },
     getTasksByProjectId: (state) => (projectId) => {
       return state.tasks.filter((task) => task.projectId === projectId);
     },

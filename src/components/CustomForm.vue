@@ -119,14 +119,14 @@ const validateForm = () => {
   return errors.name.length > 0;
 };
 
-const addProject = () => {
-  projectStore.addProject(currentProject);
+const addProject = async () => {
+ await projectStore.addProject(currentProject);
   currentProject.name = "";
   currentProject.description = "";
 };
 
-const editProject = (projectId) => {
-  projectStore.updateProject(projectId, currentProject);
+const editProject = async(projectId) => {
+  await projectStore.updateProject(projectId, currentProject);
   // Refresh Form
   currentProject.name = "";
   currentProject.description = "";
