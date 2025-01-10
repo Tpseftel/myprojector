@@ -1,6 +1,4 @@
 <template>
-  <h2 class="text-4xl font-bold dark:text-white">Projects</h2>
-
   <div class="flex border  p-2">
     <button
       data-modal-target="default-modal"

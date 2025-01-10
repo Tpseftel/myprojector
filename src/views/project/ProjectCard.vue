@@ -1,7 +1,7 @@
 <template>
   <div class="w-full">
-    <ul class="divide-y divide-gray-200 dark:divide-gray-700">
-      <li class="flex text-left justify-between items-center py-4">
+    <ul class="divide-y divide-gray-200 dark:bg-gray-700 rounded-md dark:divide-gray-700">
+      <li class="flex text-left justify-between items-center p-4">
         <div>
           <h5 class="text-lg font-bold text-gray-900 dark:text-white">
             {{ title }}
