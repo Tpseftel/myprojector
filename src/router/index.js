@@ -48,11 +48,17 @@ const routes = [
     name: "About",
     component: () => import("@/views/AboutView.vue"), // Lazy loading
   },
+
+  {
+    path: '/:pathMatch(.*)*', // This matches any route
+    name: 'not-found',
+    component: () => import("@/views/NotFoundView.vue"), // Lazy loading  
+  },
 ];
 
 // Create the router instance
 const router = createRouter({
-  history: createWebHistory(), // Use history mode (no # in URL)
+  history: createWebHistory(), 
   routes,
 });
 
