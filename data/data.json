@@ -19,7 +19,7 @@
       "id": "1",
       "name": "Lorem",
       "Surname": "Ipsum",
-      "isAdmin": false
+      "isAdmin": true
     }
   ]
 }
