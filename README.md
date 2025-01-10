@@ -1,4 +1,14 @@
+
 # myprojector
+
+## Serve Data - Fake Api
+
+### Install Json server
+`>npm install json-server` 
+
+### Serve data
+
+`>npx json-server --watch ./data/data.json`
 
 ## Project setup
 ```
